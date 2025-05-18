@@ -32,14 +32,14 @@ docker build -t monitor-app .
 
 ### 2. Tag and Push to Docker Hub
 ```bash
-docker tag monitor-app mydockerhubusername/monitor-app:latest
-docker push mydockerhubusername/monitor-app:latest
+docker tag monitor-app musahx/monitor-app:latest
+docker push musahx/monitor-app:latest
 ```
 
 ### 3. Update Kubernetes Manifest
 In `app-deployment.yaml`:
 ```yaml
-image: mydockerhubusername/monitor-app:latest
+image: musahx/monitor-app:latest
 ```
 
 ### 4. Apply Deployment to GKE
