@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitor-demo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monitor-demo
+  template:
+    metadata:
+      labels:
+        app: monitor-demo
+    spec:
+      containers:
+      - name: monitor-demo
+        image: musahx/monitor-app:latest
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 200m
+            memory: 512Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: monitor-demo-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: monitor-demo
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
